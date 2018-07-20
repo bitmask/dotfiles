@@ -6,7 +6,6 @@
 #
 #
 
-
 # TODO -- wishlist
 # repo status and branch working in prompt (not slow)
 # hyphens and underscores are equivalent in ctrl-r matches
@@ -15,11 +14,12 @@
 # color files with endings in ls and completion menu
 # real 256 color support
 # completion dots
-# sample from a file, but keep the lines in order
 # remove background colour from grep --color highlighting
 
-export LOCAL="Helens-MacBook-Pro.local"
+export LOCAL=$HOST
+set mouse=a
 
+IFS=$(echo -en "\t\n\0") # fix for breaking on spaces not newlines
 
 # brew caveats (using zsh installed via brew)
 if [[ $HOST == $LOCAL ]]; then 
@@ -62,8 +62,8 @@ export TERM=xterm-256color
 export GREP_COLOR='1;35;40'
 
 if [[ $HOST == $LOCAL ]]; then 
-    alias grep='ggrep --color=auto'
-    alias ls="gls --color=auto"
+    alias grep='grep --color=auto'
+    alias ls="gls --quoting-style=literal --color=auto"
     alias diff='colordiff -u'
 else
     alias grep='grep --color=auto'
@@ -124,14 +124,19 @@ patches: <patches|join( → )>>" 2>/dev/null
 
 # Find newest work in a directory tree
 newest () { 
-    local LINES=5
-    if [[ $* != "" ]]; then
-        local LINES=$*
+    local lines=10
+    if [[ $1 != "" ]]; then
+        lines=$1
     fi
-    # TODO there is probably a nicer way to do this -- don't run find twice
-    paste <( for d in `find . -type f -print0 | xargs -0 stat -f "%m %N" | sort -n | tail -n $LINES | cut -f1 -d" "`; do date -j -f %s $d +%a" "%d" "%b" "%k":"%M; done ) <(find . -type f -print0 | xargs -0 stat -f "%m %N" | sort -n | tail -n $LINES | cut -f2 -d" ") 
+	find . -type f -printf '%T@ %p \n'|sort -n|tail -n $lines|cut -f2 -d " "
+	# find . -type f -print0 | xargs -0 stat -f "%m %N" | sort -n | tail -n 10|cut -f2 -d " "
+    #paste <( for d in `find . -type f -print0 | xargs -0 stat -f "%m %N" | sort -n | tail -n $LINES | cut -f1 -d" "`; do date -j -f %s $d +%a" "%d" "%b" "%k":"%M; done ) <(find . -type f -print0 | xargs -0 stat -f "%m %N" | sort -n | tail -n $LINES | cut -f2 -d" ") 
 }
 
+sam () {
+	[ -f "$1" ] && input="$1" || input="-"
+	cat $input | nl | gshuf | head | sort -n | cut -f2-
+}
 
 # Correct prompt shapes for vi mode
 # from https://emily.st/2013/05/03/zsh-vi-cursor/
@@ -311,7 +316,7 @@ if [[ $HOST == $LOCAL ]]; then
 
     export PERL5LIB=$PERL5LIB:$HOME/lib:$HOME/ensemble/bioperl-1.6.1:${HOME}/ensemble/ensembl/modules:${HOME}/ensemble/ensembl-compara/modules:${HOME}/src/ensembl-variation/modules:${HOME}/src/ensembl-funcgen/modules:${HOME}/Google\ Drive/Protein_prediction_from_genomic_data/lib:
 
-    export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$HOME/Google\ Drive/Human-Virus-PPI/data:$PYTHONPATH
+    #export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$HOME/Google\ Drive/Human-Virus-PPI/data:$PYTHONPATH
 
 else 
 
@@ -409,7 +414,7 @@ if [[ $HOST == $LOCAL ]]; then
     alias sort='gsort'
 fi
 
-alias -g sam='nl | shuf | head | sort -n | cut -f2-'
+#alias -g sam='nl | shuf | head | sort -n | cut -f2-'
 alias todo="vi ~/todo"
 alias sz="ssh-agent zsh"
 alias sa="ssh-add"

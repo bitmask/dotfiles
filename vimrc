@@ -1,8 +1,14 @@
 " ~/.vimrc
 
-execute pathogen#infect()
+" Specify a directory for plugins -- but this doesn't manage nvim-R?
+"call plug#begin('~/.vim/plugged')
 
-syntax on
+			
+set statusline=%f%m%r%h%w\ [BUF=%n]\ [FF=%{&ff}]\ [TYPE=%Y]%=[HEX=\%02.2B]\ [COL=%c%V]\ [%l/%L][%p%%][%o]
+set laststatus=2
+
+set guifont=Source\ Code\ Pro\ Medium:h15
+
 set nu
 set expandtab
 set noai
@@ -22,13 +28,14 @@ set matchpairs=(:),[:],{:},<:>
 set noerrorbells
 set visualbell
 
-set nohlsearch
+set hlsearch
 set ignorecase          " ignore case when searching
 set smartcase           " no ignorecase if Uppercase char present
 
 set foldmethod=indent
+set fdo-=search " search only in open folds
 
-set spell
+set nospell
 
 set ruler 
 
@@ -66,7 +73,6 @@ au BufLeave *.rb set tabstop=4
     map ,rp :!open %<.pdf
 
 
-hi MatchParen ctermbg=black ctermfg=green
 
 if has('gui_running')
 "    set fu
@@ -107,8 +113,11 @@ syntax enable
 filetype plugin on
 filetype indent on
 
-" get rid of _ auto-completing to <-
-let vimrplugin_assign = 0
+let R_term_cmd = "iterm -title R -e"
+
+let R_assign = 0 " get rid of _ auto-completing to <-
+let Rout_more_colors = 1
+
 
 " Lines added by the Vim-R-plugin command :RpluginConfig (2014-Oct-14 15:33):
 " Change the <LocalLeader> key:
@@ -146,3 +155,12 @@ function LargeFile()
  " display message
  autocmd VimEnter *  echo "The file is larger than " . (g:LargeFile / 1024 / 1024) . " MB, so some options are changed (see .vimrc for details)."
 endfunction
+
+
+syntax on
+" colour modifications to default highlighting in macvim colorscheme
+hi Search guibg=peru guifg=#FFFFFF
+hi Folded guibg=#444444 guifg=#000000
+hi Folded ctermbg=darkgrey ctermfg=black
+"hi MatchParen ctermbg=black ctermfg=green
+
