@@ -1,0 +1,48 @@
++ chrome
+    + lastpass
+    + adblockplus
+    + flashblock
+    + ghostery
+    + ublock plus adblocker
+    + zotero connector
++ iterm2
++ font source code pro
++ macvim
+    - Nvim-R for R to vim communication
+    + undotree
+
+- karabiner (if keyboard is not US layout)
+
++ homebrew and packages:
+    + colordiff
+    + coreutils
+    + diffutils
+    + findutils
+    + git
+    + grep
+    + htop
+    + igraph
+    + imagemagick
+    + mosh
+    + parallel
+    + python
+    + r
+        - colorout
+        - dplyr
+        - ggplot2
+    + sqlite
+    + tmux
+    + wget
+    + zsh
++ slack
++ cytoscape
+    + stringApp
+    + clustermaker2
+    + bingo
+    + yfiles layout
++ mac latex
++ zotero or mendeley
+- skype
+- illustrator
+- google drive
+- dropbox
