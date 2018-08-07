@@ -284,6 +284,9 @@ zstyle ':completion:*:history-words' remove-all-dups yes
 zstyle ':completion:*:history-words' list true
 zstyle ':completion:*:history-words' menu yes
 
+# Case insensitive matching, and treat - and _ as equivalent
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z-_}={A-Za-z_-}'
+
 
 # custom extensions
 
@@ -385,9 +388,11 @@ bindkey -a '^R' redo
 
 
 autoload -U zutil
-#autoload -U complist # don't like this
-autoload -Uz compinit && compinit -i
 autoload -U zmv
+
+#zstyle :compinstall filename '/Users/cook01/.zshrc'
+autoload -Uz compinit
+compinit
 
 
 # options 
