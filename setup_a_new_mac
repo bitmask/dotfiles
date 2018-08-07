@@ -8,10 +8,10 @@
 + iterm2
 + font source code pro
 + macvim
-    - Nvim-R for R to vim communication
+    + Nvim-R for R to vim communication
     + undotree
 
-- karabiner (if keyboard is not US layout)
++ karabiner (if keyboard is not US layout)
 
 + homebrew and packages:
     + colordiff
@@ -27,11 +27,14 @@
     + parallel
     + python
     + r
-        - colorout
-        - dplyr
-        - ggplot2
+        + colorout
+        + dplyr
+        + ggplot2
+        + sweave/knitr
+        + devtools
     + sqlite
     + tmux
+    + visidata (brew tap saulpw/vd)
     + wget
     + zsh
 + slack
@@ -41,8 +44,10 @@
     + bingo
     + yfiles layout
 + mac latex
+    - latexmk
 + zotero or mendeley
-- skype
-- illustrator
-- google drive
-- dropbox
+    - import collection
++ skype
++ illustrator
++ google drive
++ dropbox
