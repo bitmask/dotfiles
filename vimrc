@@ -113,10 +113,16 @@ syntax enable
 filetype plugin on
 filetype indent on
 
+let R_in_buffer = 0
+let R_notmuxconf = 1
 let R_term_cmd = "iterm -title R -e"
 
 let R_assign = 0 " get rid of _ auto-completing to <-
 let Rout_more_colors = 1
+
+" start R if not running and opening an R file
+autocmd FileType r if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
+autocmd FileType rmd if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
 
 
 " Lines added by the Vim-R-plugin command :RpluginConfig (2014-Oct-14 15:33):
@@ -158,9 +164,15 @@ endfunction
 
 
 syntax on
+
+augroup vimrc
+   autocmd!
+   autocmd ColorScheme * highlight Search guibg=peru guifg=#FFFFFF | highlight Folded guibg=#444444 guifg=#000000 | highlight Folded ctermbg=darkgrey ctermfg=black
+augroup END
+
 " colour modifications to default highlighting in macvim colorscheme
-hi Search guibg=peru guifg=#FFFFFF
-hi Folded guibg=#444444 guifg=#000000
-hi Folded ctermbg=darkgrey ctermfg=black
+"hi Search guibg=peru guifg=#FFFFFF
+"hi Folded guibg=#444444 guifg=#000000
+"hi Folded ctermbg=darkgrey ctermfg=black
 "hi MatchParen ctermbg=black ctermfg=green
 
