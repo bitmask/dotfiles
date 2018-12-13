@@ -121,8 +121,9 @@ let R_assign = 0 " get rid of _ auto-completing to <-
 let Rout_more_colors = 1
 
 " start R if not running and opening an R file
-autocmd FileType r if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
-autocmd FileType rmd if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
+" TODO: these start R every time, not only if it's not already running
+"autocmd FileType r if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
+"autocmd FileType rmd if string(g:SendCmdToR) == "function('SendCmdToR_fake')" | call StartR("R") | endif
 
 
 " Lines added by the Vim-R-plugin command :RpluginConfig (2014-Oct-14 15:33):
@@ -167,7 +168,7 @@ syntax on
 
 augroup vimrc
    autocmd!
-   autocmd ColorScheme * highlight Search guibg=peru guifg=#FFFFFF | highlight Folded guibg=#444444 guifg=#000000 | highlight Folded ctermbg=darkgrey ctermfg=black
+   autocmd ColorScheme * highlight Search guibg=peru guifg=#FFFFFF | highlight Folded guibg=#444444 guifg=#000000 | highlight Folded ctermbg=darkgrey ctermfg=black | highlight Todo guibg=#444444 guifg=#000000
 augroup END
 
 " colour modifications to default highlighting in macvim colorscheme
